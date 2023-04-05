@@ -1,0 +1,144 @@
+{% extends 'teacherapp/main.html' %}
+{% load static %}
+
+ {% block body_contents %}
+
+ {% include 'teacherapp/left_panel.html' %}
+    <!-- Left Panel -->
+
+    <!-- Right Panel -->
+
+    <div id="right-panel" class="right-panel">
+
+        <!-- Header-->
+       {% include 'teacherapp/header.html' %}
+        <!-- Header-->
+
+        <div class="breadcrumbs">
+            <div class="col-sm-4">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                        <h1>Welcome</h1>
+                    </div>
+                </div>
+            </div>
+<!--            <div class="col-sm-8">-->
+<!--                <div class="page-header float-right">-->
+<!--                    <div class="page-title">-->
+<!--                        <ol class="breadcrumb text-right">-->
+<!--                            <li class="active">{{request.user.username}}</li>-->
+<!--                        </ol>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+
+        <!-- Button trigger modal -->
+<div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <strong class="card-title">Student details</strong>
+                            </div>
+                            <div class="card-body">
+                                <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Student_name</th>
+                                            <th>Subject1</th>
+                                            <th>Subject2</th>
+                                            <th>Subject3</th>
+                                            <th>mark1</th>
+                                            <th>mark2</th>
+                                            <th>mark3</th>
+                                            <th>attendence</th>
+                                            <th>assignment1</th>
+                                            <th>assignment2</th>
+                                            <th>assignment3</th>
+
+                                             </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for c in mark %}
+                                        <tr>
+                                            <td>{{c.id}}</td>
+                                            <td>{{c.student_name}}</td>
+                                            <td>{{c.Subject1}}</td>
+                                            <td>{{c.Subject2}}</td>
+                                            <td>{{c.Subject3}}</td>
+
+                                            <td>{{c.mark1}}</td>
+                                             <td>{{c.mark2}}</td>
+                                            <td>{{c.mark3}}</td>
+                                            <td>{{c.attendence}}</td>
+                                            <td>{{c.assignment1}}</td>
+                                            <td>{{c.assignment2}}</td>
+
+                                            <td>{{c.assignment3}}</td>
+<!--                                            <td>{{c.notes}}-->
+
+<!--                                            </td>-->
+
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+<!-- Modal -->
+
+        <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <strong class="card-title">Add details</strong>
+                            </div>
+                            <div class="card-body">
+                                <form method="POST">
+                                    <div class="modal-body">
+                                    {% csrf_token %}
+                                    {{form.as_p}}
+
+                            </div>
+
+<div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        <div class="content mt-3">
+
+            {% if messages %}
+
+            <div class="col-sm-12">
+                <div class="alert  alert-success alert-dismissible fade show" role="alert">
+                    <span class="badge badge-pill badge-success">Success</span>
+                    {% for message in messages %}
+                        {{message}}
+                    {% endfor %}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+
+            {% endif %}
+        </div>
+                                            </form>
+
+        </div> <!-- .content -->
+    </div><!-- /#right-panel -->
+<script>
+        var form_fields = document.getElementsByTagName('input')
+		for (var field in form_fields){
+			form_fields[field].className += ' form-control'
+		}
+
+
+	</script>
+
+
+{% endblock body_contents %}
+
